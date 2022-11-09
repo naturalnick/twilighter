@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -27,9 +28,11 @@ export default function Hero() {
 						<Card>
 							<Card.Body>
 								<p>Search for your favorite twitter account.</p>
-								<Button variant="info" size="lg">
-									Search
-								</Button>
+								<Link to="/search">
+									<Button variant="info" size="lg">
+										Search
+									</Button>
+								</Link>
 							</Card.Body>
 						</Card>
 					</Col>
@@ -41,13 +44,15 @@ export default function Hero() {
 									Or use the tweet-randomizer to pull a random tweet
 									from some of our favorite Twitter accounts.
 								</p>
-								<Button
-									className="random-btn"
-									variant="secondary"
-									size="lg"
-								>
-									Randomize
-								</Button>
+								<Link to="/random">
+									<Button
+										className="random-btn"
+										variant="secondary"
+										size="lg"
+									>
+										Randomize
+									</Button>
+								</Link>
 							</Card.Body>
 						</Card>
 					</Col>

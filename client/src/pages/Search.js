@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import SearchBar from "../components/SearchBar/SearchBar";
 import Tweet from "../components/Tweet/Tweet";
@@ -31,44 +32,61 @@ export default function Search() {
 	};
 
 	const [tweets, setTweets] = useState({
-		name: "",
-		username: "",
-		date: "",
-		text: "",
-		retweets: 0,
-		likes: 0,
+		2244994945: {
+			id: 2244994945,
+			name: "Nick",
+			username: "nickschaefer",
+			date: "Nov 9, 2022",
+			text: "This is a tweet, testing 123",
+			retweets: 30,
+			likes: 4,
+		},
+		2244994946: {
+			id: 2244994946,
+			name: "Bruschi",
+			username: "nickschaefer",
+			date: "Nov 9, 2022",
+			text: "This is a tweet, testing 123",
+			retweets: 30,
+			likes: 4,
+		},
 	});
 
 	async function getTweets(text) {
 		//temporary data
 		setTweets((prevTweets) => {
+			const id = data.id_str;
 			return {
-				name: data.user.name,
-				username: data.user.screen_name,
-				date: data.created_at,
-				text: data.text,
-				retweets: 0,
-				likes: 0,
+				[id]: {
+					[id]: id,
+					name: data.user.name,
+					username: data.user.screen_name,
+					date: data.created_at,
+					text: data.text,
+					retweets: 0,
+					likes: 0,
+				},
 			};
 		});
 	}
-
 	function handleSearch(text) {
 		getTweets(text);
 	}
-
-	// const tweetElements = tweets.map((tweet) => {
-	// 	return <Tweet tweet={tweet} />;
-	// });
 
 	return (
 		<>
 			<SearchBar handleSearch={handleSearch} />
 			<Container>
 				<Row>
-					<Tweet />
-					<Tweet />
-					<Tweet />
+					{tweets !== undefined ? (
+						Object.values(tweets).map((tweet) => (
+							<Col className="mt-3" lg={6} key={tweet.id}>
+								<Tweet {...tweet} />
+							</Col>
+						))
+					) : (
+						<></>
+					)}
 				</Row>
 			</Container>
 		</>
