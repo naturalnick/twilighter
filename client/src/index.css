@@ -1,0 +1,28 @@
+body {
+	margin: 0;
+}
+
+@font-face {
+	font-family: Montserrat-Regular;
+	src: url(./assets/fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+	font-family: Montserrat-Bold;
+	src: url(./assets/fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+	font-family: OpenSans-Regular;
+	src: url(./assets/fonts/OpenSans-Regular.ttf);
+}
+
+@font-face {
+	font-family: OpenSans-Bold;
+	src: url(./assets/fonts/OpenSans-Bold.ttf);
+}
+
+@font-face {
+	font-family: OpenSans-Light;
+	src: url(./assets/fonts/OpenSans-Light.ttf);
+}
