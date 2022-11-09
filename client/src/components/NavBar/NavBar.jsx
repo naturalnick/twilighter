@@ -9,33 +9,29 @@ import "./NavBar.css";
 export default function NavBar() {
 	return (
 		<>
-			<Navbar className="NavBar" staticTop="true" expand="lg">
+			<Navbar className="NavBar" expand="md">
 				<Container>
-					<Navbar.Brand href="#home">
-						<Nav.Link>
-							<Link className="link" to="/">
-								<h1>Twilighter</h1>
-							</Link>
-						</Nav.Link>
+					<Navbar.Brand>
+						<Link className="title-link" to="/">
+							<h1>Twilighter</h1>
+						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav mg={6} className="ms-auto">
-							<Nav.Link>
-								<Link className="link" to="/search">
-									Search
-								</Link>
-							</Nav.Link>
-							<Nav.Link>
-								<Link className="link" to="/random">
-									Random
-								</Link>
-							</Nav.Link>
+							<Link className="link" to="/search">
+								Search
+							</Link>
+							<Link className="link" to="/random">
+								Random
+							</Link>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
-			<Outlet />
+			<div className="main">
+				<Outlet />
+			</div>
 		</>
 	);
 }

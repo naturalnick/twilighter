@@ -1,10 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Stack from "react-bootstrap/Stack";
 
 import "./Hero.css";
 
@@ -25,32 +23,19 @@ export default function Hero() {
 					</Col>
 				</Row>
 				<Row className="mt-5">
-					<Col md={6}>
-						<Card className="card">
+					<Col md={6} className="pb-3">
+						<Card>
 							<Card.Body>
 								<p>Search for your favorite twitter account.</p>
-								<Stack direction="horizontal" gap={3}>
-									<Form.Control
-										className="text-input"
-										placeholder=""
-										aria-label="Tweets to Search"
-										aria-describedby="tweets-to-search"
-										size="lg"
-									/>
-									<Button
-										className="search-btn"
-										variant="info"
-										size="lg"
-									>
-										Search
-									</Button>
-								</Stack>
+								<Button variant="info" size="lg">
+									Search
+								</Button>
 							</Card.Body>
 						</Card>
 					</Col>
 
 					<Col md={6}>
-						<Card className="card">
+						<Card>
 							<Card.Body>
 								<p>
 									Or use the tweet-randomizer to pull a random tweet
