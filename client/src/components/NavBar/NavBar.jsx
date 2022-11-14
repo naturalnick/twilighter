@@ -29,9 +29,7 @@ export default function NavBar() {
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
-			<div className="main">
-				<Outlet />
-			</div>
+			<Outlet />
 		</>
 	);
 }

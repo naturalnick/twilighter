@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 import os
 import requests
+from datetime import datetime
 
 app = Flask(__name__)
 load_dotenv()
@@ -25,67 +26,94 @@ params = {
     }
 
 def get_tweets(url):
+    try:
+        twitterResponse = requests.get(url, params=params, headers=headers).json()
+    except requests.exceptions.HTTPError as err:
+        print("Bad Status Code ", err)
+    data = twitterResponse["data"]
+    includes = twitterResponse["includes"]
     tweets = []
-    res1 = requests.get(url, params=params, headers=headers).json()
-    data = res1["data"]
-    includes = res1["includes"]
-    for item in data:
-        name = ""
-        username = ""
-        profile_image_url = ""
-        image_url = ""
-
-        if "attachments" in item.keys():
-            image_id = item["attachments"]["media_keys"][0]
+    for tweet in data:
+        if "attachments" in tweet.keys():
+            image_id = tweet["attachments"]["media_keys"][0]
             image_url = get_image_url(image_id, includes)
+        else: image_url = None
 
         for user in includes["users"]:
-            if item["author_id"] in user.values():
+            if tweet["author_id"] in user.values():
                 name = user["name"]
                 username = user["username"]
                 profile_image_url = user["profile_image_url"]
+            else: profile_image_url = None
 
         tweets.append({
             "name": name,
             "username": username,
             "profile_image_url": profile_image_url,
-            "id": item["id"],
-            "text": item["text"],
-            "image": image_url,
-            "date": item["created_at"],
-            "like_count": item["public_metrics"]["like_count"],
-            "retweet_count": item["public_metrics"]["retweet_count"],
+            "id": tweet["id"],
+            "text": tweet["text"],
+            "image_url": image_url,
+            "date": format_date(tweet["created_at"]),
+            "like_count": tweet["public_metrics"]["like_count"],
+            "retweet_count": tweet["public_metrics"]["retweet_count"],
         })
-    return res1
+    return tweets
+
+def format_date(date):
+    twitter_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
+    formatted_date = twitter_date.strftime("%b %d, %Y")
+    return formatted_date
 
 def get_image_url(image_id, media_data):
     for media in media_data["media"]:
         if media["media_key"] == image_id and media["type"] == "photo":
             return media["url"]
-        else: return None
+    return None
 
-
+def get_user_id(username):
+    try:
+        return requests.get(f"https://api.twitter.com/2/users/by?usernames={username}",
+            headers=headers).json()["data"][0]["id"]
+    except KeyError as err:
+        print("KeyError: ", err)
+        return None
 @app.route("/api/user/search")
 def user_tweets():
     query = request.args.get("query")
+    user_id = get_user_id(query)
 
-    res1 = requests.get(f"https://api.twitter.com/2/users/by?usernames={query}",
-    headers=headers).json()["data"][0]
-    user_id = res1["id"]
+    if user_id == None:
+        return {}, 204
 
     user_tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
 
-    return get_tweets(user_tweets_url), 200
+    response = jsonify(get_tweets(user_tweets_url))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response, 200
 
 @app.route("/api/tweets/search")
 def keyword_tweets():
     query = request.args.get("query")
     search_tweets_url = f"https://api.twitter.com/2/tweets/search/recent?query={query}"
-    return get_tweets(search_tweets_url), 200
+    
+    response = jsonify(get_tweets(search_tweets_url))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response, 200
 
 @app.route("/api/tweets/random")
 def random_tweet():
-    favorite_twitter_accounts = ["EckhartTolle"]
-    return "Random Tweet"
+    favorite_twitter_accounts = ["EckhartTolle", "TEDTalks", "Atlasobscura", "thewordoftheday", "ScienceChannel"]
+    user_ids = []
+
+    for account in favorite_twitter_accounts:
+        user_id = get_user_id(account)
+        user_tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
+
+    response = jsonify("Random")
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response, 200
 
 app.run(debug=True)

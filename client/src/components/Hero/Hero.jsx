@@ -27,11 +27,17 @@ export default function Hero() {
 					<Col md={6} className="pb-3">
 						<Card>
 							<Card.Body>
-								<p>Search for your favorite twitter account.</p>
+								<h3>Search Tweets</h3>
+								<p>
+									Enter a keyword or your favorite twitter account's
+									username to see most recent tweets.
+								</p>
 								<Link to="/search">
-									<Button variant="info" size="lg">
-										Search
-									</Button>
+									<div className="d-grid">
+										<Button variant="info" size="lg">
+											Search
+										</Button>
+									</div>
 								</Link>
 							</Card.Body>
 						</Card>
@@ -40,18 +46,17 @@ export default function Hero() {
 					<Col md={6}>
 						<Card>
 							<Card.Body>
+								<h3>Random Tweet Generator</h3>
 								<p>
 									Or use the tweet-randomizer to pull a random tweet
 									from some of our favorite Twitter accounts.
 								</p>
 								<Link to="/random">
-									<Button
-										className="random-btn"
-										variant="secondary"
-										size="lg"
-									>
-										Randomize
-									</Button>
+									<div className="d-grid">
+										<Button variant="secondary" size="lg">
+											Randomize
+										</Button>
+									</div>
 								</Link>
 							</Card.Body>
 						</Card>

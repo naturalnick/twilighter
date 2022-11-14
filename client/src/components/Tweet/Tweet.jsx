@@ -1,18 +1,52 @@
 import Card from "react-bootstrap/Card";
 import "./Tweet.css";
 
-export default function Tweet({ name, username, date, text, retweets, likes }) {
+export default function Tweet({
+	name,
+	username,
+	date,
+	text,
+	retweet_count,
+	like_count,
+	image_url,
+	profile_image_url,
+}) {
 	return (
 		<Card className="tweet">
-			<Card.Img variant="top" src="" />
+			<Card.Img className="card-img" variant="top" src={image_url} />
 			<Card.Body>
-				<h4 className="tweet--username">{name}</h4>
-				<p className="tweet--date">{date}</p>
+				<img
+					className="user-icon"
+					src={
+						profile_image_url != null
+							? profile_image_url
+							: require("../../assets/images/twitter.png")
+					}
+					alt={username}
+				/>
+				<h4 className="twitter-account">
+					{name} <span className="username">@{username}</span>
+				</h4>
+				<p className="tweet-date">{date}</p>
 				<p className="tweet--text">{text}</p>
 			</Card.Body>
 			<Card.Body>
-				<Card.Link className="tweet--info">{retweets} Retweets</Card.Link>
-				<Card.Link className="tweet--info">{likes} Likes</Card.Link>
+				<Card.Link className="tweet-info">
+					<img
+						className="info-img"
+						src={require("../../assets/images/retweet.png")}
+						alt="retweets"
+					/>
+					{` ${retweet_count}`}
+				</Card.Link>
+				<Card.Link className="tweet-info">
+					<img
+						className="info-img"
+						src={require("../../assets/images/like.png")}
+						alt="likes"
+					/>
+					{` ${like_count}`}
+				</Card.Link>
 			</Card.Body>
 		</Card>
 	);
