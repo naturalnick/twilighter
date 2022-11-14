@@ -13,17 +13,30 @@ export default function NavBar() {
 				<Container>
 					<Navbar.Brand>
 						<Link className="title-link" to="/">
-							<h1>Twilighter</h1>
+							<img
+								alt=""
+								src={require("../../assets/images/logo.png")}
+								width="50"
+								height="50"
+								className="d-inline-block align-top"
+							/>{" "}
+							Twilighter
 						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav mg={6} className="ms-auto">
+							<Link className="link" to="/">
+								Home
+							</Link>
 							<Link className="link" to="/search">
 								Search
 							</Link>
 							<Link className="link" to="/random">
 								Random
+							</Link>
+							<Link className="link" to="/">
+								About
 							</Link>
 						</Nav>
 					</Navbar.Collapse>

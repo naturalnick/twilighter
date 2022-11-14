@@ -19,4 +19,6 @@ h1 {
 .title-link {
 	text-decoration: none;
 	color: black;
+	font-family: OpenSans-Light;
+	font-size: 28pt;
 }

@@ -1,24 +1,40 @@
-.Hero {
-	height: 600px;
+.container {
+	max-width: 960px;
+}
+
+.card {
+	box-shadow: 2px 2px 10px #e8e4e1;
+}
+
+.hero-card {
 	background-image: url("../../assets/images/blue4.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
-	padding: 50px;
-	border-radius: 15px;
+	padding: 0 4%;
 }
 
-h2 {
+.cta {
 	font-family: Montserrat-Regular;
 	font-size: 50pt;
 	color: white;
 }
 
-.hero-p {
-	color: white;
+.card-title-sub {
+	font-size: 22pt;
+	font-family: OpenSans-Regular;
 }
 
-.random-btn {
-	margin: auto;
+.card-text {
+	font-size: 14pt;
+}
+
+.search-btn {
+	background-color: #ffc106;
+}
+
+.search-btn:hover,
+.search-btn:active {
+	background-color: #b9962b;
 }

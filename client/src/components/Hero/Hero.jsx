@@ -9,60 +9,86 @@ import "./Hero.css";
 
 export default function Hero() {
 	return (
-		<div className="Hero">
-			<Container>
-				<Row>
-					<Col>
-						<h2>All your favorite tweets at your fingertips.</h2>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<p className="hero-p">
-							This is more description. You'll like what you see.
-						</p>
-					</Col>
-				</Row>
-				<Row className="mt-5">
-					<Col md={6} className="pb-3">
-						<Card>
-							<Card.Body>
-								<h3>Search Tweets</h3>
-								<p>
-									Enter a keyword or your favorite twitter account's
-									username to see most recent tweets.
-								</p>
-								<Link to="/search">
-									<div className="d-grid">
-										<Button variant="info" size="lg">
-											Search
-										</Button>
-									</div>
-								</Link>
-							</Card.Body>
-						</Card>
-					</Col>
+		<Container>
+			<Row>
+				<Col md={12} className="pb-3">
+					<Card className="hero-card">
+						<Card.Body>
+							<Card.Title className="mt-4">
+								<span className="cta">Tweet searching simplified.</span>
+							</Card.Title>
 
-					<Col md={6}>
-						<Card>
-							<Card.Body>
-								<h3>Random Tweet Generator</h3>
-								<p>
-									Or use the tweet-randomizer to pull a random tweet
-									from some of our favorite Twitter accounts.
-								</p>
-								<Link to="/random">
-									<div className="d-grid">
-										<Button variant="secondary" size="lg">
-											Randomize
-										</Button>
-									</div>
-								</Link>
-							</Card.Body>
-						</Card>
-					</Col>
-				</Row>
-			</Container>
-		</div>
+							<Card.Text className="mt-3 mb-3">
+								Twilighter's search engine filters and displays tweets
+								without all the ads, notifications and clutter. No
+								log-in needed and it's free.
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
+			<Row className="mt-3">
+				<Col md={6} className="pb-3">
+					<Card>
+						<Card.Body>
+							<Card.Title className="card-title-sub">
+								<img
+									alt=""
+									src={require("../../assets/images/search.png")}
+									width="30"
+									height="30"
+								/>
+								{"  "}
+								Search Tweets
+							</Card.Title>
+							<hr />
+							<Card.Text className="mb-4">
+								Enter a keyword or your favorite twitter account's
+								username to see most recent tweets.
+							</Card.Text>
+							<Link to="/search">
+								<div className="d-grid">
+									<Button variant="info" size="lg">
+										Search
+									</Button>
+								</div>
+							</Link>
+						</Card.Body>
+					</Card>
+				</Col>
+
+				<Col md={6}>
+					<Card>
+						<Card.Body>
+							<Card.Title className="card-title-sub">
+								<img
+									alt="random"
+									src={require("../../assets/images/shuffle.png")}
+									width="30"
+									height="30"
+								/>{" "}
+								Random Tweet Generator
+							</Card.Title>
+							<hr />
+							<Card.Text className="mb-4">
+								Or use the tweet-randomizer to pull a random tweet from
+								some of our favorite Twitter accounts.
+							</Card.Text>
+							<Link to="/random">
+								<div className="d-grid">
+									<Button
+										className="search-btn"
+										variant="light"
+										size="lg"
+									>
+										Randomize
+									</Button>
+								</div>
+							</Link>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
+		</Container>
 	);
 }

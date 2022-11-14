@@ -12,14 +12,14 @@ export default function SearchBar({ handleSearch }) {
 
 	return (
 		<Card className="search-container">
-			<Card.Body className="search-bar">
-				<h3>
+			<Card.Body>
+				<Card.Title className="search-card-title">
 					Searching
 					{queryType === "tweet"
 						? " tweets by keyword"
 						: " twitter acounts by username"}
 					.
-				</h3>
+				</Card.Title>
 				<div key={`inline-checkbox}`} className="mb-3">
 					<Form.Check
 						inline
@@ -50,7 +50,7 @@ export default function SearchBar({ handleSearch }) {
 					/>
 					<Button
 						onClick={() => handleSearch(queryType, input)}
-						variant="secondary"
+						variant="primary"
 						size="lg"
 					>
 						Search
