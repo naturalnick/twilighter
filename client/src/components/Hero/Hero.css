@@ -22,19 +22,10 @@
 }
 
 .card-title-sub {
-	font-size: 22pt;
+	font-size: 18pt !important;
 	font-family: OpenSans-Regular;
 }
 
 .card-text {
-	font-size: 14pt;
-}
-
-.search-btn {
-	background-color: #ffc106;
-}
-
-.search-btn:hover,
-.search-btn:active {
-	background-color: #b9962b;
+	font-size: 13pt;
 }

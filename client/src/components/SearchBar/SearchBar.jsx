@@ -45,6 +45,7 @@ export default function SearchBar({ handleSearch }) {
 						placeholder={queryType === "tweet" ? "Keyword" : "Username"}
 						aria-label="Twitter User"
 						aria-describedby="twitter-user"
+						type="text"
 						value={input || ""}
 						onChange={(e) => setInput(e.target.value)}
 					/>

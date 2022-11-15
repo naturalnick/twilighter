@@ -76,11 +76,7 @@ export default function Hero() {
 							</Card.Text>
 							<Link to="/random">
 								<div className="d-grid">
-									<Button
-										className="search-btn"
-										variant="light"
-										size="lg"
-									>
+									<Button variant="warning" size="lg">
 										Randomize
 									</Button>
 								</div>

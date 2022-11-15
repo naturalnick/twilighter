@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import os
 import requests
 from datetime import datetime
+import urllib.parse
+import random
 
 app = Flask(__name__)
 load_dotenv()
@@ -24,15 +26,15 @@ params = {
         "tweet.fields": "created_at,public_metrics",
         "user.fields": "username,name,profile_image_url",
     }
+    
+def get_tweets(url, max_results="10"):
+    params.update({"max_results": max_results})
 
-def get_tweets(url):
-    try:
-        twitterResponse = requests.get(url, params=params, headers=headers).json()
-    except requests.exceptions.HTTPError as err:
-        print("Bad Status Code ", err)
+    twitterResponse = requests.get(url, params=params, headers=headers).json()
     data = twitterResponse["data"]
     includes = twitterResponse["includes"]
     tweets = []
+
     for tweet in data:
         if "attachments" in tweet.keys():
             image_id = tweet["attachments"]["media_keys"][0]
@@ -71,19 +73,14 @@ def get_image_url(image_id, media_data):
     return None
 
 def get_user_id(username):
-    try:
-        return requests.get(f"https://api.twitter.com/2/users/by?usernames={username}",
-            headers=headers).json()["data"][0]["id"]
-    except KeyError as err:
-        print("KeyError: ", err)
-        return None
+    return requests.get(f"https://api.twitter.com/2/users/by?usernames={username}",
+        headers=headers).json()["data"][0]["id"]
+
+        
 @app.route("/api/user/search")
 def user_tweets():
     query = request.args.get("query")
     user_id = get_user_id(query)
-
-    if user_id == None:
-        return {}, 204
 
     user_tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
 
@@ -92,28 +89,52 @@ def user_tweets():
 
     return response, 200
 
+def sort_by_retweets(e):
+    return e["like_count"]
+
+def filter_popular(tweetsToSort):
+    tweetsToSort.sort(reverse=True, key=sort_by_retweets)
+    return tweetsToSort[:10]
+
 @app.route("/api/tweets/search")
 def keyword_tweets():
-    query = request.args.get("query")
-    search_tweets_url = f"https://api.twitter.com/2/tweets/search/recent?query={query}"
+    query = urllib.parse.quote(request.args.get("query"))
+    filter_query = urllib.parse.quote(' is:verified -is:retweet lang:en')
+    search_tweets_url = f"https://api.twitter.com/2/tweets/search/recent?query={query}{filter_query}"
     
-    response = jsonify(get_tweets(search_tweets_url))
+    tweets = filter_popular(get_tweets(search_tweets_url, "100"))
+    response = jsonify(tweets)
     response.headers.add("Access-Control-Allow-Origin", "*")
 
     return response, 200
+
+class FavoriteAccounts:
+    def __init__(self, usernames):
+        self.usernames = usernames
+        self.user_ids = self.get_ids()
+    def get_ids(self):
+        user_ids = []
+        for username in self.usernames:
+            user_ids.append(get_user_id(username))
+        return user_ids
+
+fav_accounts = FavoriteAccounts(["EckhartTolle", "TEDTalks", "Atlasobscura", "thewordoftheday", "ScienceChannel"])
 
 @app.route("/api/tweets/random")
 def random_tweet():
-    favorite_twitter_accounts = ["EckhartTolle", "TEDTalks", "Atlasobscura", "thewordoftheday", "ScienceChannel"]
-    user_ids = []
+    random_id = random.choice(fav_accounts.user_ids)
+    user_tweets_url = f"https://api.twitter.com/2/users/{random_id}/tweets"
+    user_tweets = get_tweets(user_tweets_url, "100")
 
-    for account in favorite_twitter_accounts:
-        user_id = get_user_id(account)
-        user_tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
-
-    response = jsonify("Random")
+    response = jsonify(random.choice(user_tweets))
     response.headers.add("Access-Control-Allow-Origin", "*")
 
     return response, 200
+
+@app.errorhandler(KeyError)
+def not_found_error(error):
+    error_msg = jsonify({"Error": "Not Found"})
+    error_msg.headers.add("Access-Control-Allow-Origin", "*")
+    return error_msg, 404
 
 app.run(debug=True)
