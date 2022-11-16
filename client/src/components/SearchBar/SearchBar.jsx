@@ -99,7 +99,7 @@ export default function SearchBar({ handleSearch }) {
 						Search
 					</Button>
 				</InputGroup>
-				<Form.Text className="fine-print">
+				<Form.Text>
 					{queryType === "tweet"
 						? "Alphanumeric characters (letters A-Z, numbers 0-9) # and @"
 						: "Alphanumeric characters only (letters A-Z, numbers 0-9). No spaces. Must be exact match to twitter username / handle."}
