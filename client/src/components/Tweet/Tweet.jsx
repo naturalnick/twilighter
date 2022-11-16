@@ -1,3 +1,4 @@
+import Linkify from "react-linkify";
 import Card from "react-bootstrap/Card";
 import "./Tweet.css";
 
@@ -28,7 +29,9 @@ export default function Tweet({
 					{name} <span className="username">@{username}</span>
 				</h4>
 				<p className="tweet-date">{date}</p>
-				<p className="tweet--text">{text}</p>
+				<Linkify>
+					<p className="tweet--text">{text}</p>
+				</Linkify>
 			</Card.Body>
 			<Card.Body>
 				<Card.Link className="tweet-info">

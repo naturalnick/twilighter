@@ -1,0 +1,11 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.page {
+	align-items: flex-start;
+	margin: auto;
+	max-width: 1000px !important;
+}

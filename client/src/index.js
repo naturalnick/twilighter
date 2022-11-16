@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Random from "./pages/Random";
 import NoPage from "./pages/NoPage";
-import NavBar from "./components/NavBar/NavBar";
+import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -16,7 +16,7 @@ root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<NavBar />}>
+				<Route path="/" element={<App />}>
 					<Route index element={<Home />} />
 					<Route path="search" element={<Search />} />
 					<Route path="random" element={<Random />} />

@@ -22,3 +22,7 @@ h1 {
 	font-family: OpenSans-Light;
 	font-size: 28pt;
 }
+
+.active {
+	font-weight: bold;
+}

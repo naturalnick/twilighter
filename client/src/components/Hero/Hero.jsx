@@ -20,8 +20,9 @@ export default function Hero() {
 
 							<Card.Text className="mt-3 mb-3">
 								Twilighter's search engine filters and displays tweets
-								without all the ads, notifications and clutter. No
-								log-in needed and it's free.
+								without all the ads, notifications and clutter. No login
+								is required and it's completely free, so get searching
+								and find the tweets you're looking for today.
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -49,7 +50,7 @@ export default function Hero() {
 							<Link to="/search">
 								<div className="d-grid">
 									<Button variant="info" size="lg">
-										Search
+										Start Searching
 									</Button>
 								</div>
 							</Link>
@@ -67,7 +68,7 @@ export default function Hero() {
 									width="30"
 									height="30"
 								/>{" "}
-								Random Tweet Generator
+								Tweet Randomizer
 							</Card.Title>
 							<hr />
 							<Card.Text className="mb-4">

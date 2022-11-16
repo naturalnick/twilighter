@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Tweet from "../components/Tweet/Tweet";
 import RandomBar from "../components/RandomBar/RandomBar";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Container from "react-bootstrap/esm/Container";
+import "./Page.css";
 
 export default function Random({ isLoading }) {
 	const [randomTweet, setRandomTweet] = useState({});
@@ -25,7 +26,6 @@ export default function Random({ isLoading }) {
 	async function handleClick() {
 		setRandomTweet(await getTweet());
 	}
-
 	return (
 		<Container>
 			<Row>

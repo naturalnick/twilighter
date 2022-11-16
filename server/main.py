@@ -23,7 +23,7 @@ headers = {
 params = {
         "expansions": "attachments.media_keys,author_id",
         "media.fields": "url",
-        "tweet.fields": "created_at,public_metrics",
+        "tweet.fields": "created_at,public_metrics,entities",
         "user.fields": "username,name,profile_image_url",
     }
     
@@ -76,7 +76,6 @@ def get_user_id(username):
     return requests.get(f"https://api.twitter.com/2/users/by?usernames={username}",
         headers=headers).json()["data"][0]["id"]
 
-        
 @app.route("/api/user/search")
 def user_tweets():
     query = request.args.get("query")
@@ -86,14 +85,13 @@ def user_tweets():
 
     response = jsonify(get_tweets(user_tweets_url))
     response.headers.add("Access-Control-Allow-Origin", "*")
-
     return response, 200
 
-def sort_by_retweets(e):
+def sort_by_likes(e):
     return e["like_count"]
 
 def filter_popular(tweetsToSort):
-    tweetsToSort.sort(reverse=True, key=sort_by_retweets)
+    tweetsToSort.sort(reverse=True, key=sort_by_likes)
     return tweetsToSort[:10]
 
 @app.route("/api/tweets/search")

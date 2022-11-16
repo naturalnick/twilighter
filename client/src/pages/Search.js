@@ -8,7 +8,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 import SearchBar from "../components/SearchBar/SearchBar";
 import Tweet from "../components/Tweet/Tweet";
-import "./Search.css";
+import "./Page.css";
 
 export default function Search() {
 	const [tweets, setTweets] = useState({});
@@ -40,40 +40,37 @@ export default function Search() {
 		setTweets(await getTweets(queryType, text));
 		setIsLoading(false);
 	}
-
 	return (
-		<>
+		<Container fluid="xs" className="page-container">
 			<SearchBar handleSearch={handleSearch} />
-			<Container className="mt-2">
-				<Row>
-					<Col>
-						{isLoading ? (
-							<Spinner
-								className="loading-bar"
-								animation="border"
-								role="status"
-							>
-								<span className="visually-hidden">Loading...</span>
-							</Spinner>
-						) : (
-							<></>
-						)}
-					</Col>
-				</Row>
-				<Row>
-					{tweets !== undefined ? (
-						Object.values(tweets).map((tweet) => (
-							<Col className="mt-3" xl={6} key={tweet.id}>
-								<Tweet {...tweet} />
-							</Col>
-						))
+			<Row>
+				<Col>
+					{isLoading ? (
+						<Spinner
+							className="loading-bar"
+							animation="border"
+							role="status"
+						>
+							<span className="visually-hidden">Loading...</span>
+						</Spinner>
 					) : (
-						<Alert className="w-auto m-auto mt-4" variant="warning">
-							No results.
-						</Alert>
+						<></>
 					)}
-				</Row>
-			</Container>
-		</>
+				</Col>
+			</Row>
+			<Row>
+				{tweets !== undefined ? (
+					Object.values(tweets).map((tweet) => (
+						<Col className="mt-3" lg={6} key={tweet.id}>
+							<Tweet {...tweet} />
+						</Col>
+					))
+				) : (
+					<Alert className="w-auto m-auto mt-4" variant="warning">
+						No results.
+					</Alert>
+				)}
+			</Row>
+		</Container>
 	);
 }
