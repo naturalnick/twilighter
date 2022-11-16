@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from dotenv import load_dotenv
+from datetime import datetime
 import os
 import requests
-from datetime import datetime
 import urllib.parse
 import random
 
@@ -12,8 +12,8 @@ load_dotenv()
 data = {
     "grant_type": "client_credentials",
 }
-api_key = os.environ["__API_KEY__"]
-api_key_secret = os.environ["__API_KEY_SECRET__"]
+api_key = os.getenv("__API_KEY__")
+api_key_secret = os.getenv("__API_KEY_SECRET__")
 res = requests.post("https://api.twitter.com/oauth2/token", data=data, auth=(api_key, api_key_secret))
 bearer = res.json()["access_token"]
 headers = {
@@ -129,10 +129,15 @@ def random_tweet():
 
     return response, 200
 
+@app.route("/", methods=["GET", "POST"])
+def index():
+    return "Hello World", 200
+
 @app.errorhandler(KeyError)
 def not_found_error(error):
     error_msg = jsonify({"Error": "Not Found"})
     error_msg.headers.add("Access-Control-Allow-Origin", "*")
     return error_msg, 404
 
+#remove for pythonanywhere
 app.run(debug=True)
