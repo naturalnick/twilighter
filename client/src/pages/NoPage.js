@@ -7,7 +7,7 @@ export default function NoPage() {
 				width="80px"
 				heigth="80px"
 			/>
-			<h1 className="display-1 fw-bold">Page Not Found</h1>
+			<h1 className="fw-bold">Page Not Found</h1>
 		</div>
 	);
 }
