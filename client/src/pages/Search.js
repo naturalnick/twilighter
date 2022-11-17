@@ -8,6 +8,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 import SearchBar from "../components/SearchBar/SearchBar";
 import Tweet from "../components/Tweet/Tweet";
+import { SERVER_URL } from "../settings";
 import "./Page.css";
 
 export default function Search() {
@@ -18,11 +19,9 @@ export default function Search() {
 		try {
 			const response = (
 				queryType === "username"
-					? await axios.get(
-							`http://127.0.0.1:5000/api/user/search?query=${text}`
-					  )
+					? await axios.get(`${SERVER_URL}/api/user/search?query=${text}`)
 					: await axios.get(
-							`http://127.0.0.1:5000/api/tweets/search?query=${text}`
+							`${SERVER_URL}/api/tweets/search?query=${text}`
 					  )
 			).data;
 			return response;
