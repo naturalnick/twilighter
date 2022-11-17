@@ -9,6 +9,12 @@
 	font-size: 22pt !important;
 }
 
+.spinner {
+	position: relative;
+	top: 10px;
+	left: 50%;
+}
+
 @media only screen and (max-width: 600px) {
 	.search-container {
 		max-width: 100%;

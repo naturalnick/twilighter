@@ -6,25 +6,24 @@ import Placeholder from "react-bootstrap/Placeholder";
 import Button from "react-bootstrap/esm/Button";
 import Tweet from "../../components/Tweet/Tweet";
 import { SERVER_URL } from "../../settings";
-import "./RandomBar.css";
 
 export default function RandomBar() {
 	const [randomTweet, setRandomTweet] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
 
 	async function getTweet() {
 		try {
 			return (await axios.get(`${SERVER_URL}/api/tweets/random`)).data;
 		} catch (error) {
-			if (error.response.status === 404) {
-				console.warn(error.response.status);
-				return undefined;
-			}
+			console.warn(error.response.status);
 			return undefined;
 		}
 	}
 
 	async function handleClick() {
+		setIsLoading(true);
 		setRandomTweet(await getTweet());
+		setIsLoading(false);
 	}
 	return (
 		<Card style={{ minWidth: "30rem" }}>
@@ -33,6 +32,7 @@ export default function RandomBar() {
 					<Button
 						className="random-btn"
 						onClick={handleClick}
+						disabled={isLoading}
 						variant="primary"
 						size="lg"
 					>

@@ -4,18 +4,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
-import Spinner from "react-bootstrap/Spinner";
 
 import SearchBar from "../components/SearchBar/SearchBar";
 import Tweet from "../components/Tweet/Tweet";
 import { SERVER_URL } from "../settings";
-import "./Page.css";
 
 export default function Search() {
 	const [tweets, setTweets] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	async function getTweets(queryType, text) {
+		setIsLoading(true);
+		let newTweets = undefined;
 		try {
 			const response = (
 				queryType === "username"
@@ -24,37 +24,18 @@ export default function Search() {
 							`${SERVER_URL}/api/tweets/search?query=${text}`
 					  )
 			).data;
-			return response;
+			newTweets = response;
 		} catch (error) {
-			if (error.response.status === 404) {
-				console.log(error.response.status);
-				return undefined;
-			}
-			return undefined;
+			console.log(error.response.status);
 		}
-	}
-
-	async function handleSearch(queryType, text) {
-		setIsLoading(true);
-		setTweets(await getTweets(queryType, text));
+		setTweets(newTweets);
 		setIsLoading(false);
 	}
 	return (
 		<Container fluid="xs" className="page-container">
-			<SearchBar handleSearch={handleSearch} />
 			<Row>
 				<Col>
-					{isLoading ? (
-						<Spinner
-							className="loading-bar"
-							animation="border"
-							role="status"
-						>
-							<span className="visually-hidden">Loading...</span>
-						</Spinner>
-					) : (
-						<></>
-					)}
+					<SearchBar getTweets={getTweets} isLoading={isLoading} />
 				</Col>
 			</Row>
 			<Row>
