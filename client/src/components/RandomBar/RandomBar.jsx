@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+
 import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/Card";
-import Placeholder from "react-bootstrap/Placeholder";
 import Button from "react-bootstrap/esm/Button";
+
 import Tweet from "../../components/Tweet/Tweet";
 import { SERVER_URL } from "../../settings";
+import "./RandomBar.css";
 
 export default function RandomBar() {
 	const [randomTweet, setRandomTweet] = useState({});
@@ -26,19 +28,16 @@ export default function RandomBar() {
 		setIsLoading(false);
 	}
 	return (
-		<Card style={{ minWidth: "30rem" }}>
-			<Card.Header>
-				<div className="d-grid">
-					<Button
-						className="random-btn"
-						onClick={handleClick}
-						disabled={isLoading}
-						variant="primary"
-						size="lg"
-					>
-						Get Random Tweet
-					</Button>
-				</div>
+		<Card className="random-bar">
+			<Card.Header className="text-center">
+				<Button
+					onClick={handleClick}
+					disabled={isLoading}
+					variant="primary"
+					size="lg"
+				>
+					Get Random Tweet
+				</Button>
 			</Card.Header>
 			<Card.Body>
 				{Object.keys(randomTweet).length !== 0 ? (
@@ -46,11 +45,14 @@ export default function RandomBar() {
 						<Tweet {...randomTweet} />
 					</Col>
 				) : (
-					<>
-						<Placeholder xs={6} />
-						<Placeholder className="w-75" />{" "}
-						<Placeholder style={{ width: "25%" }} />
-					</>
+					<div className="placeholder">
+						<img
+							alt="random"
+							src={require("../../assets/images/shuffle.png")}
+							width="100"
+							height="100"
+						/>
+					</div>
 				)}
 			</Card.Body>
 		</Card>

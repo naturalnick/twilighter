@@ -1,0 +1,12 @@
+.random-bar {
+	max-width: 500px;
+	margin: auto;
+}
+
+div.placeholder {
+	width: 100%;
+	height: 250px;
+	background-color: transparent;
+	text-align: center;
+	padding-top: 60px;
+}

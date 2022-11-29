@@ -32,7 +32,7 @@ export default function Search() {
 		setIsLoading(false);
 	}
 	return (
-		<Container fluid="xs" className="page-container">
+		<Container fluid="xs">
 			<Row>
 				<Col>
 					<SearchBar getTweets={getTweets} isLoading={isLoading} />

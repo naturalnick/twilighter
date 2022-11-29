@@ -9,7 +9,7 @@ import "./Hero.css";
 
 export default function Hero() {
 	return (
-		<Container>
+		<div>
 			<Row>
 				<Col md={12} className="pb-3">
 					<Card className="hero-card">
@@ -86,6 +86,6 @@ export default function Hero() {
 					</Card>
 				</Col>
 			</Row>
-		</Container>
+		</div>
 	);
 }
