@@ -39,6 +39,29 @@ Screenshot:<br>
 -  Error handling in Python and Javascript
 -  The larger the project got the more it forced me to get organized for my own sanity
 
+## Installation
+
+### Client
+
+    1. In /client/src/settings.js, change SERVER_URL to your host address or leave as localhost.
+    2. At the command line in the root directory run 'cd client'.
+    3. Then run 'npm install' to install node package manager.
+    4. Run 'npm run build' to set up static files for server.
+
+### Server
+
+    1. At the command line in the root directory run 'cd server'
+    2. Run 'python3 -m venv .venv' to create a virtual environment.
+    3. Run 'source .venv/bin/activate' to activate virtual environment.
+    4. Run 'pip install -m requirements.txt' to install required packages.
+
+    5. Sign up for a free Twitter developer account to get codes that enable access to the Twitter API.
+    5. In the root directory, add a file named ".env" and add two variables with the corresponding keys from your developer account.
+    	__API_KEY__=YOUR KEY
+    	__API_KEY_SECRET__=YOUR_KEY
+    6. Back at the command line run 'python3 server.py'
+     7. Server should now be online! Paste the url found in the terminal response to your browser to see Twilighter live!
+
 ## Author
 
 -  **Nick Schaefer** - _Full-Stack Software Developer_ - [Website](https://www.nschaefer.com/) | [LinkedIn](https://www.linkedin.com/in/nick-n-schaefer)

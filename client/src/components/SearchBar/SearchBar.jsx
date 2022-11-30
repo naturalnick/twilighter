@@ -43,7 +43,7 @@ export default function SearchBar({ getTweets, isLoading }) {
 
 	function handleClick() {
 		setInput((prevInput) => prevInput.trim());
-		getTweets(queryType, input.trim());
+		getTweets(queryType, input);
 	}
 
 	function formatUsername(text) {

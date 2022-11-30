@@ -27,6 +27,24 @@ export default function RandomBar() {
 		setRandomTweet(await getTweet());
 		setIsLoading(false);
 	}
+
+	function displayRandomTweet() {
+		Object.keys(randomTweet).length !== 0 ? (
+			<Col className="mt-3" xl={12}>
+				<Tweet {...randomTweet} />
+			</Col>
+		) : (
+			<div className="placeholder">
+				<img
+					alt="random"
+					src={require("../../assets/images/shuffle.png")}
+					width="100"
+					height="100"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<Card className="random-bar">
 			<Card.Header className="text-center">
@@ -39,22 +57,7 @@ export default function RandomBar() {
 					Get Random Tweet
 				</Button>
 			</Card.Header>
-			<Card.Body>
-				{Object.keys(randomTweet).length !== 0 ? (
-					<Col className="mt-3" xl={12}>
-						<Tweet {...randomTweet} />
-					</Col>
-				) : (
-					<div className="placeholder">
-						<img
-							alt="random"
-							src={require("../../assets/images/shuffle.png")}
-							width="100"
-							height="100"
-						/>
-					</div>
-				)}
-			</Card.Body>
+			<Card.Body>{displayRandomTweet()}</Card.Body>
 		</Card>
 	);
 }
