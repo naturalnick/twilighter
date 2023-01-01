@@ -6,6 +6,7 @@
 		"start": "npm start --prefix server",
 		"install-client": "cd client && npm install && npm run build && cd ..",
 		"install-server": "cd server && pip install --upgrade pip && pip install -r requirements.txt && gunicorn server:app",
+		"heroku-prebuild": "npm install",
 		"heroku-postbuild": "npm run install-client && npm run install-server"
 	}
 }
