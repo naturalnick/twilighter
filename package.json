@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "npm start --prefix server",
 		"install-client": "cd client && npm install && npm run build && cd ..",
-		"install-server": "cd server && python -m ensurepip --upgrade && pip install -r requirements.txt && gunicorn server:app",
+		"install-server": "cd server && python get-pip.py && pip install -r requirements.txt && gunicorn server:app",
 		"heroku-prebuild": "npm install",
 		"heroku-postbuild": "npm run install-client && npm run install-server"
 	}
