@@ -28,7 +28,7 @@ export default function RandomBar() {
 	}
 
 	function displayRandomTweet() {
-		Object.keys(randomTweet).length !== 0 ? (
+		return Object.keys(randomTweet).length !== 0 ? (
 			<Col className="mt-3" xl={12}>
 				<Tweet {...randomTweet} />
 			</Col>
