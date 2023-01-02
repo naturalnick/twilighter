@@ -7,7 +7,6 @@ import Alert from "react-bootstrap/Alert";
 
 import SearchBar from "../components/SearchBar/SearchBar";
 import Tweet from "../components/Tweet/Tweet";
-import { SERVER_URL } from "../settings";
 
 export default function Search() {
 	const [tweets, setTweets] = useState({});
@@ -18,10 +17,8 @@ export default function Search() {
 		try {
 			const response = (
 				queryType === "username"
-					? await axios.get(`${SERVER_URL}/api/user/search?query=${text}`)
-					: await axios.get(
-							`${SERVER_URL}/api/tweets/search?query=${text}`
-					  )
+					? await axios.get(`/api/user/search?query=${text}`)
+					: await axios.get(`/api/tweets/search?query=${text}`)
 			).data;
 			setTweets(response);
 		} catch (error) {

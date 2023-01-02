@@ -6,7 +6,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 
 import Tweet from "../../components/Tweet/Tweet";
-import { SERVER_URL } from "../../settings";
 import "./RandomBar.css";
 
 export default function RandomBar() {
@@ -15,7 +14,7 @@ export default function RandomBar() {
 
 	async function getTweet() {
 		try {
-			return (await axios.get(`${SERVER_URL}/api/tweets/random`)).data;
+			return (await axios.get(`/api/tweets/random`)).data;
 		} catch (error) {
 			console.warn(error.response.status);
 			return undefined;
