@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -9,7 +8,7 @@ import "./Hero.css";
 
 export default function Hero() {
 	return (
-		<div>
+		<>
 			<Row>
 				<Col md={12} className="pb-3">
 					<Card className="hero-card">
@@ -86,6 +85,6 @@ export default function Hero() {
 					</Card>
 				</Col>
 			</Row>
-		</div>
+		</>
 	);
 }

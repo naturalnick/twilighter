@@ -6,12 +6,15 @@ _A full-stack web app that collects tweet data from Twitter's API on the server 
 
 <br>
 
-See it in action [here](https://twilighter.herokuapp.com/).
+See it in action ~~here~~.
+<br>
+Retired due to Twitter API fees.
 
 <br>
 
 Screenshot:<br>
 <img src="./screenshot.png" width="85%">
+<img src="./screenshot2.png" width="85%">
 
 ## Details
 
